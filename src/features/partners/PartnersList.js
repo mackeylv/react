@@ -1,22 +1,34 @@
 //PartnersList.js
-import { Col } from "reactstrap";
-import { PARTNERS } from "../../app/shared/PARTNERS"
+import { Col, Row } from "reactstrap";
+//import { PARTNERS } from "../../app/shared/PARTNERS"
 //Also import the Partner component, as well as the selectAllPartners function from their respective paths.
 import Partner from "../partners/Partner"
 import { selectAllPartners } from "./partnersSlice"
+import { useSelector } from "react-redux";
+import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 const PartnersList = () => {
-    const partners = selectAllPartners();
+    const partners = useSelector(selectAllPartners);
 
-    return (
-        <Col className="mt-4" >
-            {partners.map((partner) => {
-                return (
-                    <div className='d-flex mb-5' key={partner.id} >
-                        <Partner partner={partner}/>
-                    </div>
-                );
-            })}
+    const isLoading = useSelector((state) => state.partners.isLoading);
+    const errMsg = useSelector((state) => state.partners.errMsg);
+
+    return isLoading ? (
+        <Loading />
+    ) : errMsg ? (
+        <Error errMsg={errMsg} />
+    ) : (
+        <Col className='mt-4'>
+            <Row>
+                {partners.map((partner) => {
+                    return (
+                        <div className='d-flex mb-5' key={partner.id}>
+                            <Partner partner={partner} />
+                        </div>
+                    );
+                })}
+            </Row>
         </Col>
     );
 };

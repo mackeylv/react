@@ -3,15 +3,31 @@ import './App.css';
 import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
 import CampsiteDetailPage from './pages/CampsiteDetailPage';
 //In App.js, add a Route component that will direct requests to the about path to the AboutPage component. You must import the AboutPage component in order to do this.
 import AboutPage from './pages/AboutPage';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchCampsites } from './features/campsites/campsitesSlice';
+import { fetchPartners } from './features/partners/partnersSlice';
+import { fetchPromotions } from './features/promotions/promotionsSlice';
+import { fetchComments } from './features/comments/commentsSlice';
+import './App.css';
+
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCampsites());
+    dispatch(fetchPartners());
+    dispatch(fetchPromotions());
+    dispatch(fetchComments());
+}, [dispatch]);
+
   return (
     <div className="App">
         <Header />
