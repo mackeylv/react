@@ -17,7 +17,6 @@ import { fetchPromotions } from './features/promotions/promotionsSlice';
 import { fetchComments } from './features/comments/commentsSlice';
 import './App.css';
 
-
 function App() {
   const dispatch = useDispatch();
 

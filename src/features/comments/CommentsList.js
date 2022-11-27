@@ -12,7 +12,7 @@ const CommentsList = ({ campsiteId }) => {
 //Task 2: Update the CommentsList component
     const isLoading = useSelector((state) => state.comments.isLoading);
     const errMsg = useSelector((state) => state.comments.errMsg);
-
+    
     if (isLoading) {
         return (
             <Row>
@@ -27,9 +27,8 @@ const CommentsList = ({ campsiteId }) => {
                 <Error errMsg={errMsg} />
             </Row>
         );
-    }
-    
-/*
+    }    
+
     if (comments && comments.length > 0) {
         return (
             <Col md='5' className='m-1'>
@@ -41,7 +40,7 @@ const CommentsList = ({ campsiteId }) => {
             </Col>
         );
     }
-*/
+
     return (
         <Col md='5' className='m-1'>
             There are no comments for this campsite yet.
